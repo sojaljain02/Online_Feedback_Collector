@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+</head>
+<body>
+
+<h2>Admin Dashboard</h2>
+
+<p>Total Feedback: {{ total }}</p>
+<p>Average Rating: {{ avg }}</p>
+
+<a href="/export">Export CSV</a>
+
+<h3>All Feedback</h3>
+
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Rating</th>
+        <th>Comments</th>
+        <th>Date</th>
+    </tr>
+
+    {% for row in data %}
+    <tr>
+        {% for item in row %}
+        <td>{{ item }}</td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+</table>
+
+<br>
+<a href="/">Back to Form</a>
+
+</body>
+</html>
