@@ -1,40 +1,155 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Admin Dashboard</title>
+<meta charset="UTF-8">
+<title>Admin Dashboard</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: #333;
+}
+
+/* Container */
+.container {
+    max-width: 1000px;
+    margin: 40px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+/* Header */
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Stats cards */
+.stats {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.card {
+    flex: 1;
+    margin: 10px;
+    padding: 20px;
+    border-radius: 12px;
+    color: white;
+    text-align: center;
+}
+
+.card.total {
+    background: #4facfe;
+}
+
+.card.avg {
+    background: #43e97b;
+}
+
+/* Table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 12px;
+    text-align: center;
+}
+
+th {
+    background: #667eea;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background: #f2f2f2;
+}
+
+tr:hover {
+    background: #e6ecff;
+}
+
+/* Buttons */
+.actions {
+    margin-top: 20px;
+    text-align: center;
+}
+
+a.button {
+    display: inline-block;
+    padding: 10px 15px;
+    margin: 5px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: white;
+    background: #667eea;
+    transition: 0.3s;
+}
+
+a.button:hover {
+    background: #4a5bdc;
+}
+</style>
 </head>
+
 <body>
 
-<h2>Admin Dashboard</h2>
+<div class="container">
 
-<p>Total Feedback: {{ total }}</p>
-<p>Average Rating: {{ avg }}</p>
+    <h2>Admin Dashboard</h2>
 
-<a href="/export">Export CSV</a>
+    <!-- Stats -->
+    <div class="stats">
+        <div class="card total">
+            <h3>Total Feedback</h3>
+            <p>{{ total }}</p>
+        </div>
 
-<h3>All Feedback</h3>
+        <div class="card avg">
+            <h3>Average Rating</h3>
+            <p>{{ avg }}</p>
+        </div>
+    </div>
 
-<table border="1">
-    <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Rating</th>
-        <th>Comments</th>
-        <th>Date</th>
-    </tr>
+    <!-- Table -->
+    <h3>All Feedback</h3>
 
-    {% for row in data %}
-    <tr>
-        {% for item in row %}
-        <td>{{ item }}</td>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Rating</th>
+            <th>Comments</th>
+            <th>Date</th>
+        </tr>
+
+        {% for row in data %}
+        <tr>
+            {% for item in row %}
+            <td>{{ item }}</td>
+            {% endfor %}
+        </tr>
         {% endfor %}
-    </tr>
-    {% endfor %}
-</table>
+    </table>
 
-<br>
-<a href="/">Back to Form</a>
+    <!-- Actions -->
+    <div class="actions">
+        <a href="/export" class="button">Export CSV</a>
+        <a href="/" class="button">Back to Form</a>
+    </div>
+
+</div>
 
 </body>
 </html>

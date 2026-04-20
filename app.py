@@ -1,3 +1,4 @@
+from flask import send_file
 from flask import Flask, render_template, request, redirect
 import sqlite3
 from datetime import datetime
@@ -76,13 +77,16 @@ def export_csv():
     cursor.execute("SELECT * FROM feedback")
     data = cursor.fetchall()
 
-    with open("feedback.csv", "w", newline="") as f:
+    file_path = "feedback.csv"
+
+    with open(file_path, "w", newline="") as f:
         writer = csv.writer(f)
         writer.writerow(["ID", "Name", "Email", "Rating", "Comments", "Date"])
         writer.writerows(data)
 
     conn.close()
-    return "CSV Exported!"
+
+    return send_file(file_path, as_attachment=True)
 
 
 if __name__ == "__main__":
